@@ -1,19 +1,22 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from '../../redux/operations';
 import { getContacts, getFilter } from '../../redux/selector';
-import { deleteContactAction } from '../../redux/contacts/contactSlice';
+// import { deleteContactAction } from '../../redux/contacts/contactSlice';
 
-export const ContactList = () => {
+export const ContactList = ({ contacts }) => {
   const filter = useSelector(getFilter);
-  const { contacts } = useSelector(getContacts);
+  const contactsList = useSelector(getContacts);
+  const dispatch = useDispatch();
+  const handleDelete = () => dispatch(deleteContact());
 
   let normalized = filter ? filter.toLowerCase() : '';
-  const visibleContacts = contacts.filter(contact =>
+  const visibleContacts = contactsList.filter(contact =>
     contact.name.toLowerCase().includes(normalized)
   );
-  const dispatch = useDispatch();
-  const deleteContact = contactId => {
-    dispatch(deleteContactAction(contactId));
-  };
+
+  // const deleteContact = contactId => {
+  //   dispatch(deleteContactAction(contactId));
+  // };
 
   return (
     <ul>
@@ -23,7 +26,7 @@ export const ContactList = () => {
           <button
             className="form__delete"
             type="text"
-            onClick={() => deleteContact(contact.id)}
+            onClick={() => handleDelete(contact.id)}
           >
             Delete
           </button>

@@ -1,7 +1,11 @@
 export const getContacts = state => {
-  return state.contacts;
+  return state.contacts.contacts;
 };
 
 export const getFilter = state => {
   return state.filter.filter;
 };
+
+export const getIsLoading = state => state.contacts.isLoading;
+
+export const getError = state => state.contacts.error;
