@@ -3,11 +3,11 @@ import { deleteContact } from '../../redux/operations';
 import { getContacts, getFilter } from '../../redux/selector';
 // import { deleteContactAction } from '../../redux/contacts/contactSlice';
 
-export const ContactList = ({ contacts }) => {
+export const ContactList = () => {
   const filter = useSelector(getFilter);
   const contactsList = useSelector(getContacts);
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(deleteContact(contacts.id));
+  const handleDelete = contactId => dispatch(deleteContact(contactId));
 
   let normalized = filter ? filter.toLowerCase() : '';
   const visibleContacts = contactsList.filter(contact =>
@@ -23,7 +23,11 @@ export const ContactList = ({ contacts }) => {
       {visibleContacts.map(contact => (
         <li key={contact.id}>
           {contact.name}:{contact.number}
-          <button className="form__delete" type="text" onClick={handleDelete}>
+          <button
+            className="form__delete"
+            type="text"
+            onClick={() => handleDelete(contact.id)}
+          >
             Delete
           </button>
         </li>

@@ -2,12 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { addContact, deleteContact, fetchContacts } from '../operations';
 
 const initialState = {
-  contacts: {
-    items: [],
-    isLoading: false,
-    error: null,
-  },
-  filter: '',
+  items: [],
+  isLoading: false,
+  error: null,
 };
 const contactSlice = createSlice({
   name: 'contacts',
@@ -30,7 +27,7 @@ const contactSlice = createSlice({
       })
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.contacts = action.payload;
+        state.items = action.payload;
         state.error = null;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
@@ -43,7 +40,7 @@ const contactSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.contacts.push(action.payload);
+        state.items.push(action.payload);
       })
       .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
@@ -55,9 +52,10 @@ const contactSlice = createSlice({
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        const index = state.contacts.filter(el => el.id !== action.payload);
-
-        state.contacts.splice(index, 1);
+        const index = state.items.findIndex(
+          item => item.id === action.payload.id
+        );
+        state.items.splice(index, 1);
       })
       .addCase(deleteContact.rejected, (state, action) => {
         state.isLoading = false;

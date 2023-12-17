@@ -13,7 +13,7 @@ export const ContactForm = () => {
   const handleSubmit = event => {
     event.preventDefault();
     const form = event.target;
-    dispatch(addContact(event.target.elements.text.value));
+    dispatch(addContact({ name, number }));
     form.reset();
   };
 
