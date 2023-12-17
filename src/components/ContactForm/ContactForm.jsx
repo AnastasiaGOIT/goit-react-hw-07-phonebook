@@ -6,22 +6,21 @@ import css from './ContactForm.module.css';
 export const ContactForm = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    const form = event.target;
-    dispatch(addContact({ name, number }));
-    form.reset();
-  };
-
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
 
   const onInputChange = ({ target }) => {
     if (target.name === 'name') {
       setName(target.value);
-    } else if (target.name === 'number') {
-      setNumber(target.value);
+    } else if (target.name === 'phone') {
+      setPhone(target.value);
     }
+  };
+  const handleSubmit = event => {
+    event.preventDefault();
+    const form = event.target;
+    dispatch(addContact({ name, phone }));
+    form.reset();
   };
 
   return (
@@ -37,14 +36,14 @@ export const ContactForm = () => {
         onChange={onInputChange}
       />
 
-      <label htmlFor="number">Number</label>
+      <label htmlFor="phone">Number</label>
       <input
         className={css.form__input}
         type="tel"
-        name="number"
+        name="phone"
         pattern="\+?\d{1,4}?[ .\-\s]?\(?\d{1,3}?\)?[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,4}[ .\-\s]?\d{1,9}"
         required
-        value={number}
+        value={phone}
         onChange={onInputChange}
       />
 

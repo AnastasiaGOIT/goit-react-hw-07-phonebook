@@ -1,1 +1,28 @@
+.form__delete {
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #b122224e;
+  outline: none;
+  border-color: #1413134e;
+  border-radius: 6px;
+  margin-left: 10px;
+  /* display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center; */
+}
 
+.form__delete:hover {
+  background-color: #666;
+  color: #ffffff;
+  transition: background-color 300ms ease-in-out;
+}
+
+.listItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  padding: 20px;
+}
