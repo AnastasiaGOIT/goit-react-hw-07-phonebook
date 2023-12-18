@@ -6,12 +6,16 @@ import css from './ContactList.module.css';
 export const ContactList = () => {
   const filter = useSelector(getFilter);
   const contactsList = useSelector(getContacts);
+  console.log(contactsList);
   const dispatch = useDispatch();
   const handleDelete = contactId => dispatch(deleteContact(contactId));
 
   let normalized = filter ? filter.toLowerCase() : '';
-  const visibleContacts = contactsList.filter(contact =>
-    contact.name.toLowerCase().includes(normalized)
+  const visibleContacts = contactsList.filter(
+    contact =>
+      contact.name &&
+      typeof contact.name === 'string' &&
+      contact.name.toLowerCase().includes(normalized)
   );
 
   return (
